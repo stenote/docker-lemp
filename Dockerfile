@@ -21,11 +21,13 @@ RUN apt-get install -y php5-fpm php5-cli php5-gd php5-mcrypt php5-mysql php5-cur
     sed -i 's/^listen\s*=.*$/listen = 0.0.0.0:9000/' /etc/php5/fpm/pool.d/www.conf && \
     sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = syslog/' /etc/php5/fpm/php.ini && \
     sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = syslog/' /etc/php5/cli/php.ini
+
 ADD supervisor.php5-fpm.conf /etc/supervisor/conf.d/php5-fpm.conf
 
 # Install Nginx
 RUN apt-get install -y nginx-light && \
     echo 'daemon off;' >> /etc/nginx/nginx.conf
+
 ADD supervisor.nginx.conf /etc/supervisor/conf.d/nginx.conf
 ADD nginx/fastcgi_php /etc/nginx/fastcgi_php
 
@@ -45,19 +47,15 @@ ADD supervisor.mysql.conf /etc/supervisor/conf.d/mysql.conf
 
 # Install Memcached
 RUN apt-get install -y php5-memcache memcached
+
 ADD supervisor.memcached.conf /etc/supervisor/conf.d/memcached.conf
 
 # Install Development Tools
-RUN apt-get install -y git
+RUN apt-get install -y git && apt-get install -y vim-tiny
 
 # Install Composer
 RUN mkdir -p /usr/local/bin && php -r "readfile('https://getcomposer.org/installer');" | php && \
-    mv composer.phar /usr/local/bin/composer && \
-    echo 'export COMPOSER_HOME="/usr/local/share/composer"' > /etc/profile.d/composer.sh && \
-    echo 'export PATH="/usr/local/share/composer/vendor/bin:$PATH"' >> /etc/profile.d/composer.sh
-ENV COMPOSER_HOME /usr/local/share/composer
-
-RUN apt-get install -y vim
+    mv composer.phar /usr/local/bin/composer
 
 EXPOSE 80
 EXPOSE 22
