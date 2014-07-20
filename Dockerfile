@@ -51,7 +51,7 @@ RUN apt-get install -y php5-memcache memcached
 ADD supervisor.memcached.conf /etc/supervisor/conf.d/memcached.conf
 
 # Install Development Tools
-RUN apt-get install -y git && apt-get install -y vim-tiny
+RUN apt-get install -y git vim-tiny
 
 # Install Composer
 RUN mkdir -p /usr/local/bin && php -r "readfile('https://getcomposer.org/installer');" | php && \
