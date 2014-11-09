@@ -1,0 +1,31 @@
+server {
+    listen 80;
+
+    index index.php;
+
+    root /var/www/;
+    charset utf8;
+
+    location / {
+
+        gzip on;
+        try_files $uri/index.php $uri /index.php;
+
+        if (!-f $request_filename) {
+            rewrite (.*) /index.php;
+        }
+
+    }
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
+        expires      30d;
+        gzip on;
+    }
+
+    location ~ .*\.(js|css)?$ {
+        expires      1h;
+
+    }
+
+    include fastcgi_php;
+}

@@ -1,20 +1,13 @@
 docker-lemp
 ===========
 
-
 Usage:
 ======
 
   ```
-    docker run -d --name=lemp stenote/docker-lemp:latest
+    docker run -d --name=lemp -v /path/to/www/:/var/www/ stenote/docker-lemp:latest
   ```
-  
-SSH:
-====
 
-* account: root
-* password: 123456
-  
 MYSQL:
 =====
 
