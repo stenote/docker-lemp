@@ -30,7 +30,6 @@ RUN sed -i 's/^listen\s*=.*$/listen = 127.0.0.1:9000/' /etc/php5/fpm/pool.d/www.
 # nginx
 RUN unlink /etc/nginx/sites-enabled/default
 ADD nginx/default /etc/nginx/sites-enabled/default
-ADD nginx/fastcgi_php /etc/nginx/fastcgi_php
 RUN mkdir /var/www/ && chown -R www-data:www-data /var/www/
 
 # mysql
