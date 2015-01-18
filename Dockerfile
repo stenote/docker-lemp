@@ -3,10 +3,7 @@ MAINTAINER stenote stenote@163.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
-#update
-RUN apt-get update
-
-# Install php nginx mysql supervisor
+## Install php nginx mysql supervisor
 RUN apt-get update && \
     apt-get install -y php5-fpm php5-cli php5-gd php5-mcrypt php5-mysql php5-curl \
                        nginx \
@@ -24,11 +21,6 @@ RUN sed -i 's/^listen\s*=.*$/listen = 127.0.0.1:9000/' /etc/php5/fpm/pool.d/www.
     mkdir /var/log/php5/ && \
     touch /var/log/php5/cli.log /var/log/php5/cgi.log && \
     chown www-data:www-data /var/log/php5/cgi.log /var/log/php5/cli.log
-
-
-
-
-
 
 # nginx
 RUN unlink /etc/nginx/sites-enabled/default
