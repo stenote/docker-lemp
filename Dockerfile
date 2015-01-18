@@ -30,7 +30,9 @@ RUN sed -i 's/^listen\s*=.*$/listen = 127.0.0.1:9000/' /etc/php5/fpm/pool.d/www.
 # nginx
 RUN unlink /etc/nginx/sites-enabled/default
 ADD nginx/default /etc/nginx/sites-enabled/default
-RUN mkdir /var/www/ && chown -R www-data:www-data /var/www/
+RUN mkdir /var/www/
+ADD nginx/index.php /var/www/
+RUN chown -R www-data:www-data /var/www/
 
 # mysql
 RUN sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
