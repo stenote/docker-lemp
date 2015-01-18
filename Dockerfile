@@ -23,7 +23,6 @@ ADD supervisor/php5-fpm.conf /etc/supervisor/conf.d/php5-fpm.conf
 
 # Install Nginx
 RUN apt-get install -y nginx && \
-    echo 'daemon off;' >> /etc/nginx/nginx.conf && \
     unlink /etc/nginx/sites-enabled/default
 
 ADD nginx/default /etc/nginx/sites-enabled/default
