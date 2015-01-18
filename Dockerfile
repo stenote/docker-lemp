@@ -32,6 +32,7 @@ RUN unlink /etc/nginx/sites-enabled/default
 ADD nginx/default /etc/nginx/sites-enabled/default
 ADD nginx/fastcgi_php /etc/nginx/fastcgi_php
 RUN mkdir /var/www/ && chown -R www-data:www-data /var/www/
+
 # mysql
 RUN sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
 RUN chown -R mysql:mysql /var/lib/mysql
