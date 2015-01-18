@@ -33,11 +33,8 @@ ADD nginx/default /etc/nginx/sites-enabled/default
 ADD nginx/fastcgi_php /etc/nginx/fastcgi_php
 RUN mkdir /var/www/ && chown -R www-data:www-data /var/www/
 # mysql
-sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
-RUN /usr/sbin/mysqld --skip-networking & \
-    sleep 5s && \
-    echo "GRANT ALL ON *.* TO root@'%' IDENTIFIED BY '123456' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql -u root -p123456 && \
-    chown -R mysql:mysql /var/lib/mysql
+RUN sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
+RUN chown -R mysql:mysql /var/lib/mysql
 
 # supervisor
 ADD supervisor/php5-fpm.conf /etc/supervisor/conf.d/php5-fpm.conf
