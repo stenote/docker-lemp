@@ -27,5 +27,10 @@ server {
 
     }
 
-    include fastcgi_php;
+    # php fastcgi setting
+        location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+    }
 }
