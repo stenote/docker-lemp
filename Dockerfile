@@ -1,7 +1,12 @@
-FROM ubuntu:14.04
+FROM debian:latest
 MAINTAINER stenote stenote@163.com
 
 ENV DEBIAN_FRONTEND noninteractive
+
+# Use free software totally, so there is no 'contrib' and 'non-free' here.
+RUN echo "deb http://mirrors.sohu.com/debian wheezy main\n\
+deb http://mirrors.sohu.com/debian wheezy-updates main\n\
+" > /etc/apt/sources.list
 
 ## Install php nginx mysql supervisor
 RUN apt-get update && \
@@ -31,7 +36,7 @@ RUN mkdir /var/www/ && chown -R www-data:www-data /var/www/
 sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
 RUN /usr/sbin/mysqld --skip-networking & \
     sleep 5s && \
-    echo "GRANT ALL ON *.* TO root@'%' IDENTIFIED BY '123456' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql -u root -p123456 &&
+    echo "GRANT ALL ON *.* TO root@'%' IDENTIFIED BY '123456' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql -u root -p123456 && \
     chown -R mysql:mysql /var/lib/mysql
 
 # supervisor
@@ -41,4 +46,4 @@ ADD supervisor/mysql.conf /etc/supervisor/conf.d/mysql.conf
 
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "--no-daemon", "-c", "/etc/supervisor/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "--nodaemon", "-c", "/etc/supervisor/supervisord.conf"]
