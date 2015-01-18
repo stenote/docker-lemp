@@ -41,6 +41,7 @@ ADD supervisor/php5-fpm.conf /etc/supervisor/conf.d/php5-fpm.conf
 ADD supervisor/nginx.conf /etc/supervisor/conf.d/nginx.conf
 ADD supervisor/mysql.conf /etc/supervisor/conf.d/mysql.conf
 
+VOLUME /var/www/
 EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "--nodaemon", "-c", "/etc/supervisor/supervisord.conf"]
