@@ -45,7 +45,7 @@ ADD supervisor/mysql.conf /etc/supervisor/conf.d/mysql.conf
 RUN apt-get install -y openssh-server && \
     mkdir /var/run/sshd && \
     echo "root:123456" | chpasswd
-RUN sed -i 's/^PermitRootLogin without-password$/PermitRootLogin yes/' /etc/ssh/sshd_config
+nnRUN sed -i 's/^PermitRootLogin without-password$/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -i 's/UsePAM yes/#UsePAM no/' /etc/ssh/sshd_config
 
 ADD supervisor/ssh.conf /etc/supervisor/conf.d/ssh.conf
