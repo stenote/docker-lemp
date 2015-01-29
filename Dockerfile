@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM ubuntu:14.04
 MAINTAINER stenote stenote@163.com
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -27,16 +27,15 @@ RUN unlink /etc/nginx/sites-enabled/default
 ADD nginx/default /etc/nginx/sites-enabled/default
 RUN mkdir /var/www/
 ADD nginx/index.php /var/www/
-RUN chown -R www-data:www-data /var/www/
+RUN chown -R www-data:www-data /var/www/ /var/log/nginx
+
 
 # mysql
 RUN sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
 RUN chown -R mysql:mysql /var/lib/mysql
 
 # supervisor
-ADD supervisor/php5-fpm.conf /etc/supervisor/conf.d/php5-fpm.conf
-ADD supervisor/nginx.conf /etc/supervisor/conf.d/nginx.conf
-ADD supervisor/mysql.conf /etc/supervisor/conf.d/mysql.conf
+ADD supervisor/lemp.conf /etc/supervisor/conf.d/lemp.conf
 
 WORKDIR /var/www/
 
