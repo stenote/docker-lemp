@@ -1,5 +1,8 @@
 docker-lemp
 ===========
+We suppose this is a develop environment for phpers.
+
+Don't use it in product environment.
 
 # Usage
 
@@ -13,7 +16,7 @@ docker-lemp
 
 ## MySQL
 * user: root
-* password: 123456
+* (No password)
 
 ## SSH
 We don't support SSH right now. You can use `docker exec` to enter the docker container.
