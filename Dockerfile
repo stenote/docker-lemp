@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM ubuntu:latest
 MAINTAINER stenote stenote@163.com
 
 ENV DEBIAN_FRONTEND noninteractive
