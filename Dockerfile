@@ -1,5 +1,4 @@
 FROM ubuntu:latest
-MAINTAINER stenote stenote@163.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -14,33 +13,17 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ## Configuration
-# php-fpm
 RUN sed -i 's/^listen\s*=.*$/listen = 127.0.0.1:9000/' /etc/php5/fpm/pool.d/www.conf && \
     sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = \/var\/log\/php5\/cgi.log/' /etc/php5/fpm/php.ini && \
     sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = \/var\/log\/php5\/cli.log/' /etc/php5/cli/php.ini && \
-    mkdir /var/log/php5/ && \
-    touch /var/log/php5/cli.log /var/log/php5/cgi.log && \
-    chown www-data:www-data /var/log/php5/cgi.log /var/log/php5/cli.log
+    sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
 
-# nginx
-RUN unlink /etc/nginx/sites-enabled/default
-ADD nginx/default /etc/nginx/sites-enabled/default
-RUN mkdir /var/www/
-ADD nginx/index.php /var/www/
-RUN chown -R www-data:www-data /var/www/
-
-# mysql
-RUN sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
-RUN chown -R mysql:mysql /var/lib/mysql
-
-# supervisor
-ADD supervisor/php5-fpm.conf /etc/supervisor/conf.d/php5-fpm.conf
-ADD supervisor/nginx.conf /etc/supervisor/conf.d/nginx.conf
-ADD supervisor/mysql.conf /etc/supervisor/conf.d/mysql.conf
+COPY files/root /
 
 WORKDIR /var/www/
 
 VOLUME /var/www/
+
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "--nodaemon", "-c", "/etc/supervisor/supervisord.conf"]
+ENTRYPOINT ["/entrypoint.sh"]
