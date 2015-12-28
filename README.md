@@ -1,7 +1,10 @@
 docker-lemp
 ===========
 
-[![Join the chat at https://gitter.im/docker-parasites/docker-lemp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/docker-parasites/docker-lemp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Docker Stars](https://img.shields.io/docker/stars/stenote/docker-lemp.svg)](https://hub.docker.com/r/stenote/docker-lemp/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/stenote/docker-lemp.svg)](https://hub.docker.com/r/stenote/docker-lemp/)
+
+
 We suppose this is a develop environment for phpers.
 
 Don't use it in product environment.
