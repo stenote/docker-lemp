@@ -1,0 +1,6 @@
+{
+  "name": "docker-lemp",
+  "tagline": "nginx  + mysql + php5-fpm in docker container.",
+  "body": "docker-lemp\r\n===========\r\n\r\n[![Docker Stars](https://img.shields.io/docker/stars/stenote/docker-lemp.svg)](https://hub.docker.com/r/stenote/docker-lemp/)\r\n[![Docker Pulls](https://img.shields.io/docker/pulls/stenote/docker-lemp.svg)](https://hub.docker.com/r/stenote/docker-lemp/)\r\n\r\n\r\nWe suppose this is a develop environment for phpers.\r\n\r\nDon't use it in product environment.\r\n\r\n# Usage\r\n\r\n    docker run -d --name=lemp \\\r\n      -v /path/to/www/:/var/www/ \\\r\n      -v /path/to/mysql:/var/lib/mysql \\\r\n      -p port_of_nginx:80 \\\r\n      stenote/docker-lemp:latest\r\n\r\n# Detail\r\n\r\n## MySQL\r\n* user: root\r\n* (No password)\r\n\r\n## SSH\r\nWe don't support SSH right now. You can use `docker exec` to enter the docker container.",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
