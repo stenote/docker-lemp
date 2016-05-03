@@ -1,10 +1,10 @@
-FROM ubuntu:latest
+FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
 ## Install php nginx mysql supervisor
 RUN apt-get update && \
-    apt-get install -y php5-fpm php5-cli php5-gd php5-mcrypt php5-mysql php5-curl \
+    apt-get install -y php-fpm php-cli php-gd php-mcrypt php-mysql php-curl \
                        nginx \
                        curl \
 		       supervisor && \
@@ -14,9 +14,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ## Configuration
-RUN sed -i 's/^listen\s*=.*$/listen = 127.0.0.1:9000/' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = \/var\/log\/php5\/cgi.log/' /etc/php5/fpm/php.ini && \
-    sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = \/var\/log\/php5\/cli.log/' /etc/php5/cli/php.ini && \
+RUN sed -i 's/^listen\s*=.*$/listen = 127.0.0.1:9000/' /etc/php/7.0/fpm/pool.d/www.conf && \
+    sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = \/var\/log\/php\/cgi.log/' /etc/php/7.0/fpm/php.ini && \
+    sed -i 's/^\;error_log\s*=\s*syslog\s*$/error_log = \/var\/log\/php\/cli.log/' /etc/php/7.0/cli/php.ini && \
     sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
 
 COPY files/root /
