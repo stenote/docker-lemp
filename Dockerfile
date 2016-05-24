@@ -3,14 +3,14 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 
 ## Install php nginx mysql supervisor
-RUN apt-get update && \
-    apt-get install -y php-fpm php-cli php-gd php-mcrypt php-mysql php-curl \
+RUN apt update && \
+    apt install -y php-fpm php-cli php-gd php-mcrypt php-mysql php-curl \
                        nginx \
                        curl \
 		       supervisor && \
     echo "mysql-server mysql-server/root_password password" | debconf-set-selections && \
     echo "mysql-server mysql-server/root_password_again password" | debconf-set-selections && \
-    apt-get install -y mysql-server && \
+    apt install -y mysql-server && \
     rm -rf /var/lib/apt/lists/*
 
 ## Configuration

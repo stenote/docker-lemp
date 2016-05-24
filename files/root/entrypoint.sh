@@ -2,7 +2,7 @@
 
 set -e
 
-chown -R www-data:www-data /var/www /var/log/php5
+chown -R www-data:www-data /var/www /var/log/php
 
 # init mysql db if necessary
 if [ ! -d /var/lib/mysql/mysql ];then
