@@ -23,7 +23,7 @@ COPY files/root /
 
 WORKDIR /var/www/
 
-VOLUME /var/www/
+VOLUME ['/var/www/', '/var/lib/mysql/']
 
 EXPOSE 80
 
