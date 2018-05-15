@@ -1,4 +1,4 @@
-docker-lemp
+docker-lemp [DEPRECATED]
 ===========
 
 [![Docker Stars](https://img.shields.io/docker/stars/stenote/docker-lemp.svg)](https://hub.docker.com/r/stenote/docker-lemp/)
