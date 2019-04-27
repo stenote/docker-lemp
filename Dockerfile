@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ## Install php nginx mysql supervisor
 RUN apt update && \
-    apt install -y php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt php7.0-curl \
+    apt install -y php7.0-fpm php7.0-gd php7.0-mcrypt php7.0-curl \
                        nginx \
                        curl \
 		       supervisor && \
